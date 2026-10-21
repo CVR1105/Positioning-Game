@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Console · Positioning Simulator</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">P</div><div id="game-name">Positioning Simulator<small id="team-label">Connecting…</small></div></div>
+    <span class="pill" id="phase">–</span>
+    <div class="spacer"></div>
+    <div class="stat"><span class="k">Round</span><span class="v" id="round">–</span></div>
+    <div class="timer" id="timer">--:--</div>
+    <div class="stat"><span class="k">Budget</span><span class="v" id="budget">–</span></div>
+    <div class="stat"><span class="k">Rank</span><span class="v" id="rank">–</span></div>
+    <button class="icon ghost" id="mute" title="Sound on/off">🔊</button>
+    <button class="icon ghost hidden" id="final-btn" title="Final standings">🏆</button>
+    <span class="conn" id="conn" title="Connection"></span>
+  </header>
+
+  <div class="wrap-page">
+    <div class="team-strip" id="team-strip" style="margin-bottom:14px"></div>
+
+    <div class="grid" style="grid-template-columns:minmax(0,1.35fr) minmax(360px,1fr);align-items:start" id="main-grid">
+      <section class="panel">
+        <div class="row" style="margin-bottom:12px">
+          <h3 style="margin:0">Perceptual map <span class="hint" id="map-hint">Select a product, then click a cell</span></h3>
+          <div class="spacer"></div>
+          <div class="tabs" style="margin:0;border:none" id="map-mode">
+            <button class="on small" data-m="demand">Demand</button>
+            <button class="small" data-m="heat">Competition</button>
+          </div>
+        </div>
+        <div id="map"></div>
+        <div id="map-legend"></div>
+      </section>
+
+      <section class="panel" id="decision-panel">
+        <h3>Round decision <span class="hint" id="decision-hint"></span></h3>
+        <div id="status-banner" class="banner info" style="margin-bottom:12px">Waiting for the facilitator to start the game…</div>
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="kpi"><div class="k">Plan cost</div><div class="v" id="plan-cost">0</div><div class="s" id="plan-left">–</div></div>
+          <div class="kpi"><div class="k">Projected sales</div><div class="v" id="plan-sales">–</div><div class="s">if rivals stay put</div></div>
+          <div class="kpi"><div class="k">Projected profit</div><div class="v" id="plan-profit">–</div><div class="s">this round</div></div>
+        </div>
+        <div class="budget-bar" id="budget-bar" style="margin-bottom:14px"><div style="width:0%"></div></div>
+        <div class="row" style="margin-bottom:8px">
+          <b>Products</b><span class="muted" id="prod-count"></span>
+          <div class="spacer"></div>
+          <button class="small" id="add-product">+ Launch new product</button>
+        </div>
+        <div class="plist" id="plist"></div>
+        <div class="row" style="margin-top:14px">
+          <button class="ghost small" id="reset-plan" title="Undo all changes this round">↺ Reset</button>
+          <div class="spacer"></div>
+          <button class="primary big" id="submit">Submit decision</button>
+        </div>
+        <div class="error-msg" id="submit-err"></div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top:16px">
+      <div class="tabs" id="tabs">
+        <button class="on" data-t="report">📊 My report</button>
+        <button data-t="market">🌐 Market intelligence</button>
+        <button data-t="rules">📘 How to play</button>
+      </div>
+      <div id="tab-body"></div>
+    </section>
+  </div>
+
+  <div class="overlay hidden" id="overlay"><div class="card" id="overlay-card"></div></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/team.js"></script>
+</body>
+</html>

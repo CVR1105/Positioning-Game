@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control Room · Positioning Simulator</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">P</div><div id="game-name">Control room<small>Facilitator</small></div></div>
+    <span class="pill" id="phase">–</span>
+    <div class="spacer"></div>
+    <div class="stat"><span class="k">Round</span><span class="v" id="round">–</span></div>
+    <div class="timer" id="timer">--:--</div>
+    <div class="stat"><span class="k">Submitted</span><span class="v" id="subs">–</span></div>
+    <a class="btn small" id="screen-link" target="_blank" rel="noopener">📺 Big screen</a>
+    <span class="conn" id="conn"></span>
+  </header>
+
+  <div class="wrap-page">
+    <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);margin-bottom:16px" id="top-grid">
+      <section class="panel">
+        <h3>Round control</h3>
+        <div id="control-msg" class="muted" style="margin-bottom:14px"></div>
+        <div class="row wrap">
+          <button class="primary big" id="btn-start">▶ Start round 1</button>
+          <button class="success big hidden" id="btn-close">⏹ Close round &amp; reveal</button>
+        </div>
+        <div class="row wrap" style="margin-top:12px">
+          <button class="small" data-extend="60">+1 min</button>
+          <button class="small" data-extend="180">+3 min</button>
+          <button class="small" data-extend="-60">−1 min</button>
+          <button class="small" id="btn-stop-timer">Stop timer</button>
+          <div class="spacer"></div>
+          <button class="danger small" id="btn-end">End game now</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>Invite teams</h3>
+        <div class="muted" style="font-size:13px">Game code</div>
+        <div class="mono" style="font-size:40px;font-weight:900;letter-spacing:.18em;color:var(--accent)" id="code">––––––</div>
+        <div class="muted" style="font-size:13px;margin-top:6px">Join link (same Wi-Fi/LAN)</div>
+        <div class="row"><input id="join-url" readonly class="mono" style="font-size:13px"><button class="small" id="copy-url">Copy</button></div>
+        <div class="muted" style="font-size:12px;margin-top:8px">If this page is open via <span class="kbd">localhost</span>, share the network address printed in the server console instead.</div>
+      </section>
+
+      <section class="panel">
+        <h3>Settings</h3>
+        <div class="grid cols-2" style="gap:10px">
+          <div class="field"><label>Minutes per round</label><select id="set-minutes">
+            <option value="0">No timer</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="8">8</option>
+            <option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="30">30</option><option value="45">45</option></select></div>
+          <div class="field"><label>Total rounds</label><select id="set-rounds"></select></div>
+        </div>
+        <label class="check field"><input type="checkbox" id="set-auto"> Auto-close when all teams submit</label>
+        <div class="row wrap">
+          <a class="btn small" id="export-csv">⬇ Export CSV</a>
+          <a class="btn small" id="export-json">⬇ Export JSON</a>
+          <div class="spacer"></div>
+          <button class="danger small" id="btn-delete">Delete game</button>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-bottom:16px">
+      <h3>Teams &amp; live decisions <span class="hint">Only you can see this. Teams never see each other's decisions.</span></h3>
+      <div class="table-scroll"><table>
+        <thead><tr><th>#</th><th>Team</th><th>Status</th><th class="n">Budget</th><th class="n">Products</th><th>Submitted plan (this round)</th><th class="n">Cost</th><th></th></tr></thead>
+        <tbody id="teams-body"></tbody>
+      </table></div>
+    </section>
+
+    <section class="panel" style="margin-bottom:16px">
+      <div class="tabs" id="tabs">
+        <button class="on" data-t="board">🏆 Leaderboard</button>
+        <button data-t="map">🗺 Full positioning map</button>
+        <button data-t="matrix">📋 Results by round</button>
+        <button data-t="log">🧾 Activity log</button>
+      </div>
+      <div id="tab-body"></div>
+    </section>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/admin.js"></script>
+</body>
+</html>

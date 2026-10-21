@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Big Screen · Positioning Simulator</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="screen-page">
+    <div class="screen-head">
+      <div class="brand"><div class="logo" style="width:48px;height:48px;font-size:24px">P</div></div>
+      <div class="grow"><h1 id="title">Positioning Simulator</h1><div class="muted" id="subtitle"></div></div>
+      <span class="pill" id="phase" style="font-size:16px;padding:8px 16px">–</span>
+      <button class="icon ghost" id="mute" title="Sound on/off">🔊</button>
+      <button class="icon ghost" id="fs" title="Full screen">⛶</button>
+      <span class="conn" id="conn"></span>
+    </div>
+    <div id="stage"></div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/screen.js"></script>
+</body>
+</html>

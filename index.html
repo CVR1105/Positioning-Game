@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Positioning Strategy Simulator</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">P</div><div>Positioning Strategy Simulator<small>Marketing &amp; Positioning Simulation Game</small></div></div>
+  </header>
+
+  <section class="hero">
+    <h1>Win the market. <span>Position smarter.</span></h1>
+    <p>A real-time, multiplayer strategy game. Up to 10 teams compete on a quality × style perceptual map over up to 8 rounds – every decision costs points, every competitor changes the payoff.</p>
+    <div class="seg-row">
+      <span class="pill">👑 Status Seekers · A10</span>
+      <span class="pill">✨ Fashion Conscious · D3</span>
+      <span class="pill">💰 Budget Conscious · H3</span>
+      <span class="pill">🔧 Quality Focused · I8</span>
+    </div>
+  </section>
+
+  <main class="landing-cards">
+    <div class="panel">
+      <h2><span class="ic">🎮</span>Join as a team</h2>
+      <p>Enter the game code from your facilitator. Pick a team name and a PIN – teammates on other laptops join with the same name and PIN.</p>
+      <form id="join-form" autocomplete="off">
+        <div class="field"><label>Game code</label><input class="code" name="code" maxlength="6" required placeholder="ABC123"></div>
+        <div class="field"><label>Team name</label><input name="team" maxlength="24" required placeholder="e.g. Market Mavericks"></div>
+        <div class="grid cols-2" style="gap:12px">
+          <div class="field"><label>Team PIN (4–8 digits)</label><input name="pin" inputmode="numeric" pattern="\d{4,8}" maxlength="8" required placeholder="••••"></div>
+          <div class="field"><label>Your name <span class="dim">(optional)</span></label><input name="player" maxlength="24" placeholder="Alex"></div>
+        </div>
+        <button class="primary big" style="width:100%;justify-content:center" type="submit">Enter the market →</button>
+        <div class="error-msg" id="join-err"></div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2><span class="ic">🧑‍🏫</span>Facilitator</h2>
+      <p>Create a game, then share the code. You control rounds, timers and see every team's decisions.</p>
+      <div class="tabs" id="fac-tabs"><button class="on" data-t="create">New game</button><button data-t="login">Manage existing</button></div>
+      <form id="create-form" autocomplete="off">
+        <div class="field"><label>Game name</label><input name="name" maxlength="60" placeholder="MBA Section A – Positioning Cup"></div>
+        <div class="grid cols-3" style="gap:10px">
+          <div class="field"><label>Rounds</label><select name="rounds"></select></div>
+          <div class="field"><label>Max teams</label><select name="teams"></select></div>
+          <div class="field"><label>Minutes / round</label><select name="minutes">
+            <option value="0">No timer</option><option value="3">3</option><option value="5">5</option><option value="8">8</option>
+            <option value="10" selected>10</option><option value="15">15</option><option value="20">20</option><option value="30">30</option></select></div>
+        </div>
+        <label class="check field"><input type="checkbox" name="auto" checked> Close round early when every team has submitted</label>
+        <div class="field"><label>Facilitator password</label><input name="password" type="password" minlength="4" required placeholder="min 4 characters"></div>
+        <div class="field hidden" id="fkey-field"><label>Server facilitator key</label><input name="fkey" type="password"></div>
+        <button class="primary" style="width:100%;justify-content:center" type="submit">Create game</button>
+        <div class="error-msg" id="create-err"></div>
+      </form>
+      <form id="login-form" class="hidden" autocomplete="off">
+        <div class="field"><label>Game code</label><input class="code" name="code" maxlength="6" required></div>
+        <div class="field"><label>Facilitator password</label><input name="password" type="password" required></div>
+        <button class="primary" style="width:100%;justify-content:center" type="submit">Open control room</button>
+        <div class="error-msg" id="login-err"></div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2><span class="ic">📺</span>Big screen</h2>
+      <p>Put this on the projector: live countdown, which teams have submitted, animated leaderboard, market news and the final podium. Shows no team's decisions.</p>
+      <form id="screen-form" autocomplete="off">
+        <div class="field"><label>Game code</label><input class="code" name="code" maxlength="6" required></div>
+        <button style="width:100%;justify-content:center" type="submit">Open projector view</button>
+        <div class="error-msg" id="screen-err"></div>
+      </form>
+      <hr style="border:none;border-top:1px solid var(--line);margin:22px 0">
+      <h3 style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em">How it works</h3>
+      <ol class="muted" style="padding-left:18px;font-size:14px;margin:0">
+        <li>Facilitator creates a game and opens the big screen.</li>
+        <li>Teams join from their own laptops with the code.</li>
+        <li>Each round: position products, submit before the clock runs out.</li>
+        <li>Results reveal live. Highest accumulated profit wins.</li>
+      </ol>
+    </div>
+  </main>
+
+  <script type="module" src="/js/landing.js"></script>
+</body>
+</html>
