@@ -1,21 +1,12 @@
 {
-  "name": "positioning-strategy-simulator",
+  "name": "positioning-strategy-game",
   "version": "1.0.0",
-  "description": "Real-time multiplayer Marketing & Positioning Simulation Game (up to 10 teams, 8 rounds)",
-  "main": "server/index.js",
+  "description": "Multiplayer marketing & positioning simulation game (up to 10 teams, 8 rounds, live results and leaderboard).",
+  "main": "server.js",
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning server/index.js",
-    "test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=1 test/*.test.js"
+    "start": "node server.js",
+    "test": "node test/simulate.js 6 && node test/simulate.js 10 && node test/timers.js"
   },
-  "dependencies": {
-    "express": "^4.22.3",
-    "socket.io": "^4.8.4"
-  },
-  "devDependencies": {
-    "socket.io-client": "^4.8.4"
-  },
-  "private": true,
-  "engines": {
-    "node": ">=22.13"
-  }
+  "engines": { "node": ">=18" },
+  "license": "MIT"
 }
